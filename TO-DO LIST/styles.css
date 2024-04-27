@@ -1,0 +1,127 @@
+/* styles.css */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding-bottom: 30px;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px 0;
+  margin: 0;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 10px 10px 0 0;
+}
+
+.sections {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.box {
+  flex: 1 0 calc(33.33% - 20px);
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+h2 {
+  margin: 0 0 10px;
+}
+
+.task-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-list li {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: grab;
+}
+
+.task-list li.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.task-actions {
+  display: flex;
+  margin-top: 10px;
+}
+
+.task-actions input[type="text"],
+.task-actions input[type="datetime-local"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+}
+
+.task-actions button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.task-actions button:hover {
+  background-color: #0056b3;
+}
+
+.motivational-quotes {
+  background-color: #007bff;
+  color: #fff;
+  padding: 20px;
+  border-radius: 0 0 10px 10px;
+}
+
+.motivational-quotes h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+/* styles.css */
+/* Existing styles remain unchanged */
+
+.task-list li.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.motivational-quotes {
+  background-color: #007bff;
+  color: #fff;
+  padding: 20px;
+  border-radius: 0 0 10px 10px;
+}
+
+.motivational-quotes h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  margin-right: 10px;
+}
