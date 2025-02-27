@@ -3,26 +3,43 @@ name: TaskEase CI/CD
 on:
   push:
     branches:
-      - main
+      - main  # Runs CI/CD on push to 'main' branch
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3  # Fetches latest code
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install  # Installs required npm packages
 
       - name: Run Tests
-        run: npm test
+        run: npm test  # Runs test cases (ensure tests exist in package.json)
 
   deploy:
-    needs: build
+    needs: build  # Deploys only if the build job is successful
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Server
+      - name: Checkout Repository
+        uses: actions/checkout@v3  # Fetches latest code
+
+      - name: Deploy to AWS EC2
+        env:
+          AWS_HOST: ${{ secrets.AWS_HOST }}  # Public IP of your AWS EC2 instance
+          AWS_USER: "ubuntu"  # Default EC2 user (for Amazon Linux, use 'ec2-user')
+          SSH_KEY: ${{ secrets.AWS_SSH_KEY }}  # Your private SSH key (added as GitHub Secret)
         run: |
-          echo "Deploying TaskEase..."
-          # Add actual deployment commands here
+          echo "$SSH_KEY" > private_key.pem
+          chmod 600 private_key.pem  # Set correct permissions for SSH key
+          
+          # Connect to EC2 instance and deploy the latest changes
+          ssh -o StrictHostKeyChecking=no -i private_key.pem $AWS_USER@$AWS_HOST << 'EOF'
+            cd /home/ubuntu/TaskEase  # Change to your app directory
+            git pull origin main  # Pull latest changes
+            npm install  # Install dependencies
+            pm2 restart server  # Restart server using PM2 (modify as needed)
+          EOF
+          
+          echo "Deployment to AWS EC2 completed!"
