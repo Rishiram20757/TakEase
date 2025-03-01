@@ -14,18 +14,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configure AWS credentials
-        run: |
-          echo "Configuring AWS credentials..."
-          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set aws_session_token ${{ secrets.AWS_SESSION_TOKEN }}
-          aws configure set region ${{ secrets.AWS_REGION }}
-
-      - name: Build project
-        run: |
-          npm install
-          npm run build
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Deploy to S3
         run: |
-          aws s3 sync ./dist s3://${{ secrets.S3_BUCKET }} --delete
+          aws s3 sync "TO-DO LIST" s3://${{ secrets.S3_BUCKET }} --delete
